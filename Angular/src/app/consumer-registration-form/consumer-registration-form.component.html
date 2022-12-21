@@ -1,0 +1,95 @@
+<div class="container1">
+  <h1>Consumer</h1>
+  <h3>New Registration</h3>
+  <form
+    [formGroup]="consumerForm"
+    (ngSubmit)="onSubmit(consumerForm.value)"
+    method="get"
+    [class.hidden]="isHidden"
+  >
+    <div class="container2">
+      <hr />
+      <label for="name">Full Name </label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        formControlName="name"
+        placeholder="Enter your name"
+      />
+      <span
+        style="color: red"
+        *ngIf="getName && getName.invalid && getName.touched"
+      >
+        Full name Required!!</span
+      >
+      <br />
+      <label for="area">Area </label>
+      <input
+        type="text"
+        id="area"
+        name="area"
+        formControlName="area"
+        placeholder="Enter your area"
+      />
+      <span
+        style="color: red"
+        *ngIf="getArea && getArea.invalid && getArea.touched"
+      >
+        Area Required!!</span
+      >
+      <br />
+
+      <label for="city">City </label>
+      <input
+        type="text"
+        id="city"
+        name="city"
+        formControlName="city"
+        placeholder="Enter your city"
+      />
+      <span
+        style="color: red"
+        *ngIf="getCity && getCity.invalid && getCity.touched"
+      >
+        City Required!!</span
+      >
+      <br />
+
+      <label for="ctype">Connection Type </label>
+      <input
+        type="text"
+        id="ctype"
+        name="ctype"
+        formControlName="ctype"
+        placeholder="Enter your connection type"
+      />
+      <span
+        style="color: red"
+        *ngIf="getType && getType.invalid && getType.touched"
+      >
+        username Required!!</span
+      >
+      <br />
+
+      <div>
+        <button [disabled]="consumerForm.invalid" type="submit" class="submit">
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="result" [class.hidden]="!isHidden">
+  <div *ngIf="checkStatus(); else noResultBlock">
+    <p>
+      Registration Successful! Your Consumer ID is: {{ consumer.consumerId }}.
+      Please keep a note of it.
+    </p>
+  </div>
+  <ng-template #noResultBlock>
+    <h2>Registration Unsuccessful :(</h2></ng-template
+  >
+  <button (click)="onBack()">Back</button>
+</div>

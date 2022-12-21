@@ -1,0 +1,97 @@
+<div class="container1">
+  <h1>Admin</h1>
+  <h3>All Bill Reports By Year</h3>
+  <form
+    [formGroup]="userForm"
+    (ngSubmit)="onSubmit(userForm.value)"
+    method="get"
+    [class.hidden]="isHidden"
+  >
+    <div class="container2">
+      <hr />
+      <label for="userName">UserName </label>
+      <input
+        type="text"
+        id="username"
+        name="userName"
+        formControlName="userName"
+        placeholder="Enter admin username"
+      />
+      <span
+        style="color: red"
+        *ngIf="getUsername && getUsername.invalid && getUsername.touched"
+      >
+        username Required!!</span
+      >
+      <br />
+
+      <label for="password"> Password </label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        formControlName="password"
+        placeholder="Enter admin password"
+      />
+      <span
+        style="color: red"
+        *ngIf="getPassword && getPassword.invalid && getPassword.touched"
+        >Password Required!!
+      </span>
+      <br />
+      <p>
+        <label for="year">Year </label>
+        <input
+          type="year"
+          id="year"
+          name="year"
+          formControlName="year"
+          placeholder="Enter Year"
+        />
+        <span
+          style="color: red"
+          *ngIf="getYear && getYear.invalid && getYear.touched"
+          >Year Required!!
+        </span>
+      </p>
+
+      <div>
+        <button [disabled]="userForm.invalid" type="submit" class="submit">
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="result" [class.hidden]="!isHidden">
+  <div *ngIf="checkBillsStatus(); else noResultBlock">
+    <div class="container">
+      <h2>{{ year }} Bill</h2>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr class="table-dark">
+            <th scope="col">billId</th>
+            <th scope="col">consumerId</th>
+            <th scope="col">month</th>
+            <th scope="col">year</th>
+            <th scope="col">unitsConsumed</th>
+            <th scope="col">totalAmount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bill of Bills" class="table-info">
+            <td>{{ bill.billId }}</td>
+            <td>{{ bill.consumerId.consumerId }}</td>
+            <td>{{ bill.month }}</td>
+            <td>{{ bill.year }}</td>
+            <td>{{ bill.unitsConsumed }}</td>
+            <td>{{ bill.totalAmount }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <ng-template #noResultBlock><h2>No Bills Found!</h2></ng-template>
+  <button (click)="onBack()">Back</button>
+</div>

@@ -1,0 +1,44 @@
+.container {
+  width: 61%;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 30px;
+}
+.container h1,
+h3 {
+  text-align: center;
+}
+
+.container h1 {
+  margin-bottom: 30px;
+}
+
+.bill-logo {
+  width: 60px;
+  height: auto;
+}
+
+.container h3 {
+  margin-top: 20px;
+  color: #0f4736;
+  background-color: #b0f7f2;
+  display: inline;
+  padding: 5px 10px;
+  border-radius: 12px;
+}
+
+.role-choose {
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.role-choose a {
+  background-color: #7cbdec;
+  text-decoration: none;
+  padding: 5px 10px;
+  color: #13054d;
+  border-radius: 12px;
+}

@@ -1,0 +1,65 @@
+<div class="container1">
+  <h1>Consumer</h1>
+  <h3>All Bill Reports</h3>
+  <form
+    [formGroup]="consumerForm"
+    (ngSubmit)="onSubmit(consumerForm.value)"
+    method="get"
+    [class.hidden]="isHidden"
+  >
+    <div class="container2">
+      <hr />
+      <label for="consumerId">Consumer ID </label>
+      <input
+        type="text"
+        id="consumerId"
+        name="consumerId"
+        formControlName="consumerId"
+        placeholder="Enter Consumer ID"
+      />
+      <span
+        style="color: red"
+        *ngIf="getConsumerId && getConsumerId.invalid && getConsumerId.touched"
+        >Consumer ID Required!!</span
+      >
+      <br />
+      <div>
+        <button [disabled]="consumerForm.invalid" type="submit" class="submit">
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="result" [class.hidden]="!isHidden">
+  <div *ngIf="checkBillsStatus(); else noResultBlock">
+    <div class="container">
+      <h2>All Bill</h2>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr class="table-dark">
+            <th scope="col">billId</th>
+            <th scope="col">consumerId</th>
+            <th scope="col">month</th>
+            <th scope="col">year</th>
+            <th scope="col">unitsConsumed</th>
+            <th scope="col">totalAmount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bill of Bills" class="table-info">
+            <td>{{ bill.billId }}</td>
+            <td>{{ bill.consumerId.consumerId }}</td>
+            <td>{{ bill.month }}</td>
+            <td>{{ bill.year }}</td>
+            <td>{{ bill.unitsConsumed }}</td>
+            <td>{{ bill.totalAmount }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <ng-template #noResultBlock><h2>No Bills Found!</h2></ng-template>
+  <button (click)="onBack()">Back</button>
+</div>
